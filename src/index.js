@@ -4,8 +4,6 @@ var argv = optimist.argv
 
 const commands = argv._;
 
-console.log('commands', commands);
-
 let command = '';
 try {
   command = require(`./command/${commands[0]}`);

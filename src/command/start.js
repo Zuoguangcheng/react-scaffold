@@ -5,18 +5,17 @@ import path from 'path';
 import scaffoldWebpack from '../config/webpack.config';
 
 let start = args => {
-  // const pkg = require(path.join(args.cwd, 'webpack.config.js'))
 
   const scaffoldWebpackConfig = scaffoldWebpack(args.cwd);
 
   scaffoldWebpackConfig.entry.app.unshift("webpack-dev-server/client?http://localhost:9000/")
   scaffoldWebpackConfig.entry.app.unshift('webpack/hot/dev-server');
 
+  const pkg = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
 
-  console.log('scaffoldWebpackConfigplugins', scaffoldWebpackConfig.plugins);
-  console.log('scaffoldWebpackConfigmodule', scaffoldWebpackConfig.module);
+  console.log('pkg', pkg);
 
-  const compiler = Webpack(scaffoldWebpackConfig);
+  const compiler = Webpack(pkg);
 
   const devServer = { //webpack-dev-server配置热更新以及跨域
     historyApiFallback: true, //不跳转

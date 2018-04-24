@@ -5,7 +5,6 @@ let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 const name = cwd => {
-  console.log('cwd', cwd);
   var plugins = [
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor", //和配置的入口对应
