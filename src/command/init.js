@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const stat = fs.stat;
-
+const child_process = require('child_process');
+const execFile = child_process.execFile;
+const chalk = require('chalk');
 
 const from = path.join(__dirname, '../../template');
-
+const getTemplate = path.join(__dirname, '../../script/get-template.sh');
 
 const copy = function (src, dst) {
   // 读取目录中的所有文件/目录
@@ -60,14 +62,25 @@ var exists = function (src, dst, callback) {
 
 
 const init = (argv) => {
-  console.log('argv', argv);
+  const nameOrPath = argv._[1];
 
-  if (!argv._[1]) {
+  if (!nameOrPath) {
     console.error('请输入项目名称');
     return false;
   }
-  const to = path.join(argv.cwd, argv._[1]);
-  exists(from, to, copy);
+  if (nameOrPath.includes('https://github.com') || nameOrPath.includes('git@github.com:')) {
+    console.log(chalk.blue('下载模板文件......'));
+    execFile(getTemplate, [argv.cwd, argv._[1]], (err, stdout, stderr) => {
+      if (!err) {
+        console.log(chalk.green('下载成功'));
+      } else {
+        console.log(chalk.red('下载出错'));
+      }
+    })
+  } else {
+    const to = path.join(argv.cwd, argv._[1]);
+    exists(from, to, copy);
+  }
 }
 
 
