@@ -1,4 +1,4 @@
-import optimist from 'optimist'
+const optimist = require('optimist')
 
 var argv = optimist.argv
 

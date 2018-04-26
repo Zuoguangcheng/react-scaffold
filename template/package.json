@@ -3,11 +3,9 @@
   "version": "1.1.0",
   "description": "",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack --progress --colors --display-error-details --config webpack.config.js",
+    "start": "NODE_ENV=development react-scaffold start",
     "clean": "rimraf build && mkdir build",
-    "scaffold": "npm run clean && NODE_ENV=production scaffold build",
-    "scaffold-start": "NODE_ENV=development scaffold start"
+    "build": "npm run clean && NODE_ENV=production react-scaffold build"
   },
   "repository": {
     "type": "git",

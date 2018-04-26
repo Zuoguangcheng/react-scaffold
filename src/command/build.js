@@ -1,7 +1,7 @@
-import path from 'path';
-import Webpack from 'webpack';
+const path = require('path');
+const Webpack = require('webpack');
 
-import scaffoldWebpack from '../config/webpack.config';
+const scaffoldWebpack = require('../config/webpack.config')
 
 let build = args => {
   console.log('args', args);

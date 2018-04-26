@@ -1,8 +1,7 @@
-import Webpack from 'webpack'
-import WebpackDevServer from 'webpack-dev-server'
-import path from 'path';
-
-import scaffoldWebpack from '../config/webpack.config';
+const path = require('path');
+const Webpack = require('webpack');
+const WebpackDevServer =require('webpack-dev-server');
+const scaffoldWebpack = require('../config/webpack.config')
 
 let start = args => {
 

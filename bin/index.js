@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const { resolve } = require('path')
 const r = path => resolve(__dirname, path)
 
