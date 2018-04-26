@@ -1,6 +1,6 @@
 {
   "name": "react-scaffold-app",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "keyword": "react-scaffold",
   "main": "./bin/index.js",
@@ -10,6 +10,10 @@
   "author": "zuoguangcheng",
   "license": "ISC",
   "devDependencies": {
+    
+  },
+  "dependencies": {
+    "module-alias": "^2.0.6",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -24,9 +28,6 @@
     "optimist": "^0.6.1",
     "webpack": "^3.5.4",
     "webpack-dev-server": "^2.7.1"
-  },
-  "dependencies": {
-    "module-alias": "^2.0.6"
   },
   "_moduleAliases": {
     "@": "src"
