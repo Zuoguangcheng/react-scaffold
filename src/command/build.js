@@ -5,11 +5,12 @@ import scaffoldWebpack from '../config/webpack.config';
 
 let build = args => {
   console.log('args', args);
-  // const scaffoldWebpack = require(path.join('../config/', 'webpack.config.js'));
 
-  const pkg = require(path.join(args.cwd, 'webpack.config.js'))
+  const scaffoldWebpackConfig = scaffoldWebpack(args.cwd);
 
-  const compiler = Webpack(scaffoldWebpack(args.cwd));
+  const pkg = require(path.join(args.cwd, './webpack/webpack.config.prod.js'))(scaffoldWebpackConfig);
+
+  const compiler = Webpack(pkg);
   compiler.run((err, stats) => {
     if (err) {
       console.log('err===>', err);

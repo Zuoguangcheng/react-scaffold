@@ -1,5 +1,5 @@
 {
-  "name": "scaffold",
+  "name": "react-scaffold-app",
   "version": "1.0.0",
   "description": "",
   "keyword": "react-scaffold",
@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "zuoguangcheng",
   "license": "ISC",
   "devDependencies": {
     "babel": "^6.23.0",

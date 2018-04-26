@@ -13,8 +13,6 @@ let start = args => {
 
   const pkg = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
 
-  console.log('pkg', pkg);
-
   const compiler = Webpack(pkg);
 
   const devServer = { //webpack-dev-server配置热更新以及跨域
