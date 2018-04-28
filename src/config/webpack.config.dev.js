@@ -94,7 +94,7 @@ const name = cwd => {
       historyApiFallback: true, //不跳转
       noInfo: true,
       inline: true, //实时刷新
-      // port: '8888',  //不指定固定端口
+      port: '8888',  //不指定固定端口
       hot: true,
       proxy: {
         '/list': {
