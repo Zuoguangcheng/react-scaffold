@@ -50,6 +50,8 @@ const getPort = _args => {
 
         }
         return port;
+      } else {
+        return 8888;
       }
     }
   } else {
