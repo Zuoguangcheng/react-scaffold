@@ -1,7 +1,6 @@
 const optimist = require('optimist')
 
 var argv = optimist.argv
-
 const commands = argv._;
 
 let command = '';

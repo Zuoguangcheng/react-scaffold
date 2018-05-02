@@ -39,6 +39,24 @@ const availablePorts = async port => {
   return availablePort;
 }
 
+const getPort = _args => {
+  if (Array.isArray(_args)) {
+    for (let i = 0; i < _args.length; i++) {
+      if (_args[i].includes('port')) {
+        let port = 8888;
+        try {
+          port = _args[i].split('=')[1];
+        } catch (e) {
+
+        }
+        return port;
+      }
+    }
+  } else {
+    return 8888;
+  }
+}
+
 
 let start = async args => {
 
@@ -49,13 +67,12 @@ let start = async args => {
 
   /* 修改webpack配置以及devServer配置 */
   const scaffoldConfig = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
-
   const compiler = Webpack(scaffoldConfig);
 
+  scaffoldConfig.devServer.port = getPort(args._);
+
   const server = new WebpackDevServer(compiler, scaffoldConfig.devServer)
-
   const port = await availablePorts(scaffoldConfig.devServer.port);
-
 
   server.listen(port, function (err, result) {
     if (err) {
