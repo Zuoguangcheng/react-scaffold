@@ -65,8 +65,6 @@ let start = async args => {
   const scaffoldWebpackConfig = scaffoldWebpack(args.cwd);
 
 
-
-
   const scaffoldConfig = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
   scaffoldConfig.devServer.port = getPort(args._);
   const port = await availablePorts(scaffoldConfig.devServer.port);
