@@ -50,10 +50,10 @@ const getPort = _args => {
 
         }
         return port;
-      } else {
-        return 8888;
       }
     }
+
+    return 8888
   } else {
     return 8888;
   }
@@ -64,17 +64,25 @@ let start = async args => {
 
   const scaffoldWebpackConfig = scaffoldWebpack(args.cwd);
 
-  scaffoldWebpackConfig.entry.app.unshift("webpack-dev-server/client?http://localhost:9000/")
-  scaffoldWebpackConfig.entry.app.unshift('webpack/hot/dev-server');
 
-  /* 修改webpack配置以及devServer配置 */
+
+
   const scaffoldConfig = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
-  const compiler = Webpack(scaffoldConfig);
-
   scaffoldConfig.devServer.port = getPort(args._);
-
-  const server = new WebpackDevServer(compiler, scaffoldConfig.devServer)
   const port = await availablePorts(scaffoldConfig.devServer.port);
+
+  scaffoldConfig.entry.app.unshift(`webpack-dev-server/client?http://localhost:${port}/`)
+  scaffoldConfig.entry.app.unshift('webpack/hot/dev-server');
+
+  const compiler = Webpack(scaffoldConfig);
+  const server = new WebpackDevServer(compiler, scaffoldConfig.devServer)
+
+
+
+
+
+
+
 
   server.listen(port, function (err, result) {
     if (err) {
