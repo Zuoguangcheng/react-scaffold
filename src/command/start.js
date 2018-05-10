@@ -1,6 +1,7 @@
 const net = require('net')
 const path = require('path');
 const fs = require('fs');
+const chalk = require('chalk');
 const Webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const scaffoldWebpack = require('../config/webpack.config')
