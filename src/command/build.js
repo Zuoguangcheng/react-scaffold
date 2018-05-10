@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const Webpack = require('webpack');
 
 const scaffoldWebpack = require('../config/webpack.config')
@@ -8,9 +9,15 @@ let build = args => {
 
   const scaffoldWebpackConfig = scaffoldWebpack(args.cwd);
 
-  const pkg = require(path.join(args.cwd, './webpack/webpack.config.prod.js'))(scaffoldWebpackConfig);
+  let scaffoldConfig = scaffoldWebpackConfig;
 
-  const compiler = Webpack(pkg);
+  fs.exists(path.join(args.cwd, './webpack/webpack.config.dev.js'), (exist) => {
+    if (exist) {
+      scaffoldConfig = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
+    }
+  })
+
+  const compiler = Webpack(scaffoldConfig);
   compiler.run((err, stats) => {
     if (err) {
       console.log('err===>', err);

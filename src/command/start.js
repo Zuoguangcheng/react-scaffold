@@ -1,5 +1,6 @@
 const net = require('net')
 const path = require('path');
+const fs = require('fs');
 const Webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const scaffoldWebpack = require('../config/webpack.config')
@@ -64,8 +65,14 @@ let start = async args => {
 
   const scaffoldWebpackConfig = scaffoldWebpack(args.cwd);
 
+  let scaffoldConfig = scaffoldWebpackConfig;
 
-  const scaffoldConfig = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
+  fs.exists(path.join(args.cwd, './webpack/webpack.config.dev.js'), (exist) => {
+    if (exist) {
+      scaffoldConfig = require(path.join(args.cwd, './webpack/webpack.config.dev.js'))(scaffoldWebpackConfig);
+    }
+  })
+
   scaffoldConfig.devServer.port = getPort(args._);
   const port = await availablePorts(scaffoldConfig.devServer.port);
 
@@ -76,17 +83,13 @@ let start = async args => {
   const server = new WebpackDevServer(compiler, scaffoldConfig.devServer)
 
 
-
-
-
-
-
-
+  console.log(chalk.blue('server start at port...' + port));
   server.listen(port, function (err, result) {
     if (err) {
       console.log('err', err);
     }
-    console.log('server start at port' + port);
+
+    console.log(chalk.blue('server start at port' + port));
   })
 
 }
